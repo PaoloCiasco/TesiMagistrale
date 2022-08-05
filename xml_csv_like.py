@@ -90,6 +90,6 @@ for child in myroot:
 tree = et.ElementTree(newroot) # New tree generation for the output file
 
 et.indent(tree, space="\t", level=0) # Correct indentation (needs Python >= 3.9)
-tree.write('C:/Users/Paolo/Documents/to_be_csved.xml', encoding='utf-8') # Writing of the new xml file to be indexed
+tree.write('C:/Users/Paolo/Documents/to_be_csved.xml', encoding='utf-8') # Writing of the new xml file to be ready for the trasformation to the csv one
 
 
