@@ -1,3 +1,10 @@
+# This file is used to transform the original news report in a file
+# that will be parsable by the handler of Solr, regarding the
+# specifics in the Apache Solr Guide.
+#
+# Author: Paolo Ciasco
+
+
 import xml.etree.ElementTree as et
 
 ## Namespace registration for correct parsing to avoid "ns" tag in the output file
