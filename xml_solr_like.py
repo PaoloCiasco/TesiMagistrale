@@ -76,13 +76,13 @@ for child in myroot:
                 for child3 in child2:
                     if (child3.tag == 'item'):
                         for child4 in child3:
-                            if (child4.tag == 'title'):
+                            if (child4.tag == 'title' and i2 < len(doc)):
                                 et.SubElement(doc[i2], "field", name="title").text = child4.text
-                            if (child4.tag == 'link'):
+                            if (child4.tag == 'link' and i2 < len(doc)):
                                 et.SubElement(doc[i2], "field", name="source").text = child4.text
-                            if (child4.tag == 'description'):
+                            if (child4.tag == 'description') and i2 < len(doc):
                                 et.SubElement(doc[i2], "field", name="news").text = child4.text
-                            if (child4.tag == 'pubDate'):
+                            if (child4.tag == 'pubDate' and i2 < len(doc)):
                                 et.SubElement(doc[i2], "field", name="date").text = child4.text
                                 et.SubElement(doc[i2], "field", name = "category").text = child.attrib.get("title")
                                 i2 += 1
