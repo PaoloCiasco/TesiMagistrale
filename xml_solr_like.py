@@ -57,7 +57,7 @@ for child in myroot:
                     if (child3.tag == 'link'):
                         et.SubElement(doc[i], "field", name="source").text = child3.text
                     if (child3.tag == 'description'):
-                        et.SubElement(doc[i], "field", name="news").text = child3.text
+                        et.SubElement(doc[i], "field", name="news").text = child3.text.replace("\n", " ")
                     if (child3.tag == 'pubDate'):
                         et.SubElement(doc[i], "field", name="date").text = child3.text
                         et.SubElement(doc[i], "field", name = "category").text = child.attrib.get("title")
@@ -81,7 +81,7 @@ for child in myroot:
                             if (child4.tag == 'link' and i2 < len(doc)):
                                 et.SubElement(doc[i2], "field", name="source").text = child4.text
                             if (child4.tag == 'description') and i2 < len(doc):
-                                et.SubElement(doc[i2], "field", name="news").text = child4.text
+                                et.SubElement(doc[i2], "field", name="news").text = child4.text.replace("\n", " ")
                             if (child4.tag == 'pubDate' and i2 < len(doc)):
                                 et.SubElement(doc[i2], "field", name="date").text = child4.text
                                 et.SubElement(doc[i2], "field", name = "category").text = child.attrib.get("title")
