@@ -19,7 +19,7 @@ et.register_namespace('georss', "http://www.georss.org/georss")
 
 #####
 
-oldtree = et.parse("C:/Users/Paolo/OneDrive - Universita' degli Studi di Roma Tor Vergata/Laurea Magistrale/Tesi/Codice/2.Classificazione/Dummy/Data/LargeScale_Report_August2022.xml") # File's loading (beautified version)
+oldtree = et.parse(".xml") # File's loading (beautified version)
 myroot = oldtree.getroot() # Root selection
 
 newroot = et.Element("add") # Root creation of the new file to be indexed ready to Solr
@@ -134,6 +134,6 @@ for element in array_dict:
 tree = et.ElementTree(newroot) # New tree generation for the output file
 
 et.indent(tree, space="\t", level=0) # Correct indentation (needs Python >= 3.9)
-tree.write("C:/Users/Paolo/OneDrive - Universita' degli Studi di Roma Tor Vergata/Laurea Magistrale/Tesi/Codice/2.Classificazione/Dummy/Data/LargeScale_Report_August2022_to_be_csved.xml", encoding='utf-8') # Writing of the new xml file to be indexed
+tree.write(".xml", encoding='utf-8') # Writing of the new xml file to be indexed
 
 
