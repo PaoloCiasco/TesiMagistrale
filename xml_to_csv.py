@@ -6,9 +6,7 @@
 from xml.etree import ElementTree
 import csv
 
-xml = ElementTree.parse("C:/Users/Paolo/Documents/dati pseudo/to_be_csved_first_dataset.xml") # File's loading
-
-
+xml = ElementTree.parse(".xml") # File's loading
 def find_max_number_categories(): # This function finds the max number of categories of the news
 
     max_categories = 0
@@ -43,7 +41,7 @@ def write_categories(doc): # This function writes all the categories of a specif
          
 
 
-csvfile = open("C:/Users/Paolo/Documents/dati pseudo/data.csv","w", encoding='utf-8') # CSV Creation
+csvfile = open(".csv","w", encoding='utf-8') # CSV Creation
 csvfile_writer = csv.writer(csvfile)
 
 csvfile.write('\ufeff') # Metadata for the right "utf-8" encoding
@@ -55,13 +53,22 @@ csvfile.write(header)
 
 for doc in xml.findall("doc"):
     if(doc):
-            name = doc.find("title").text 
-            source = doc.find("source").text
-            news = doc.find("news").text
+            name = doc.find("title").text
+            if(doc.find("source") != None): 
+                source = doc.find("source").text
+            else:
+                source = None
+            if(doc.find("news") != None):
+                news = doc.find("news").text
+            else:
+                news = None
             categories = write_categories(doc)
             
-            csv_line =  name + '___'  + source   + '___' + str(news) + '___' + categories  + '\n'
-
+            if(name == None or source == None or news == None or categories == None):
+                csv_line = ''
+            else:
+                csv_line =  name + '___'  + source   + '___' + str(news) + '___' + categories  + '\n'
+            
             csvfile.write(csv_line)
     
 
