@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <h1>Query Results</h1>
+        {% for x in res %}
+            <p>{{"News: '{0}'.".format(x['news'])}}</p>
+	    <p>{{"Category: '{0}'.".format(x['category'])}}</p>
+        {% endfor %}
+    </body>
+</html> 
