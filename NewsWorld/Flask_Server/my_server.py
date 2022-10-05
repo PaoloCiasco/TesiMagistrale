@@ -1,7 +1,5 @@
-from email import charset
 import os
-from flask import Flask, flash, request, redirect, url_for, render_template
-from werkzeug.utils import secure_filename
+from flask import Flask, request, redirect, url_for, render_template
 from prediction import Classifier
 import prediction
 import torch
@@ -12,7 +10,10 @@ import pysolr
 import requests
 
 
-solr = pysolr.Solr('http://localhost:8983/solr/Iss_Report')
+solr = pysolr.Solr('http://localhost:8983/solr/Iss_Report') # Istance of the Solr Index
+
+# Parameters for the reload request of the core of the Solr Index
+
 
 params = {
     'action': 'RELOAD',
@@ -20,11 +21,13 @@ params = {
 }
 
 
-UPLOAD_FOLDER = '/home/paoloc/Flask_Server/Upload'
+UPLOAD_FOLDER = 'PATH_TO_THE_SERVER/Upload' 
 ALLOWED_EXTENSIONS = {'xml'}
 
 app = Flask(__name__, template_folder='Files')
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+# Usage of the model found in the classification section
 
 model = Classifier("Musixmatch/umberto-commoncrawl-cased-v1", num_labels=6, dropout_rate=0.2)
 model.load_state_dict(torch.load("/home/paoloc/Flask_Server/state_dict_model_def.pth"))
@@ -58,8 +61,8 @@ def upload_file():
         if 'file' not in request.files:
             return redirect(url_for('fail'))
         file = request.files['file']
-        # If the user does not select a file, the browser submits an
-        # empty file without a filename.
+        # If the user does not select a file or the extension is not correct,
+        # redirect to the "fail" template.
         if file.filename == '':
             return redirect(url_for('fail'))
         if (allowed_file(file.filename) == False):
@@ -68,6 +71,9 @@ def upload_file():
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             patherino = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            # Gather the news from the file uploaded, make the prediction and
+            # write the category in a .txt file. Read the category from the .txt 
+            # and write it in the correct document in the xml file.
             index_path = xml_solr_like.index(patherino)
             tree = et.parse(index_path)
             myroot = tree.getroot()
@@ -96,7 +102,7 @@ def upload_file():
             with open('/home/paoloc/Flask_Server/Indexing/File_to_be_indexed.xml', 'rb') as f:
              data = f.read()
 
-            response = requests.post('http://localhost:8983/solr/Iss_Report/update', headers=headers, data=data)
+            response = requests.post('http://localhost:8983/solr/Iss_Report/update', headers=headers, data=data) # POST request for indexing
             response = requests.get('http://localhost:8983/solr/admin/cores', params=params)
             return redirect(url_for('success', name=filename))
     return '''
