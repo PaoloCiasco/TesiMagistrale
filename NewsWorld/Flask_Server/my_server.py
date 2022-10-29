@@ -26,6 +26,7 @@ ALLOWED_EXTENSIONS = {'xml'}
 
 app = Flask(__name__, template_folder='Files')
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.static_folder = 'static'
 
 # Usage of the model found in the classification section
 
