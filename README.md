@@ -1,5 +1,6 @@
 # TesiMagistrale
 
-Questa repository contiene tutto il codice prodotto per la stesura della tesi magistrale di Informatica a Tor Vergata.
+This repo contains almost every code that has been written due to the production of the Master's degree thesis in Computer Science.
+The main goal is to make a tedious work simple and reliable thanks to the Machine Learning algorithms.
 
-La posizione dei file segue per la maggior parte la struttura dell'indice della tesi.
+// TO BE CONTINUED
