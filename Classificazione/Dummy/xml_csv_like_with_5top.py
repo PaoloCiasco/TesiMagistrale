@@ -7,7 +7,7 @@
 # Author: Paolo Ciasco
 
 
-
+import os
 import xml.etree.ElementTree as et
 
 
@@ -19,7 +19,8 @@ et.register_namespace('georss', "http://www.georss.org/georss")
 
 #####
 
-oldtree = et.parse(".xml") # File's loading (beautified version)
+path_to_xml = os.path.join('Files_to_process', 'news_to_process.xml')
+oldtree = et.parse(path_to_xml) # File's loading (beautified version)
 myroot = oldtree.getroot() # Root selection
 
 newroot = et.Element("add") # Root creation of the new file to be indexed ready to Solr

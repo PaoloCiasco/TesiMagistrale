@@ -3,6 +3,7 @@
 #
 # Author: Paolo Ciasco
 
+import os
 import xml.etree.ElementTree as et
 
 ## Namespace registration for correct parsing to avoid "ns" tag in the output file
@@ -13,7 +14,8 @@ et.register_namespace('georss', "http://www.georss.org/georss")
 
 #####
 
-oldtree = et.parse(".xml") # File's loading (beautified version)
+path_to_xml = os.path.join('Files_to_process', 'news_to_process.xml')
+oldtree = et.parse(path_to_xml) # File's loading (beautified version)
 myroot = oldtree.getroot() # Root selection
 
 newroot = et.Element("add") # Root creation of the new file to be indexed ready to Solr
@@ -92,6 +94,7 @@ for child in myroot:
 tree = et.ElementTree(newroot) # New tree generation for the output file
 
 et.indent(tree, space="\t", level=0) # Correct indentation (needs Python >= 3.9)
-tree.write(".xml", encoding='utf-8') # Writing of the new xml file to be ready for the trasformation to the csv one
+output_filename = os.path.join('Files_to_process', 'news_to_be_csved.xml')
+tree.write(output_filename, encoding='utf-8') # Writing of the new xml file to be ready for the trasformation to the csv one
 
 

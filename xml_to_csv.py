@@ -2,11 +2,13 @@
 #
 # Author: Paolo Ciasco
 
-
+import os
 from xml.etree import ElementTree
 import csv
 
-xml = ElementTree.parse(".xml") # File's loading
+path_to_xml = os.path.join('Files_to_process', 'news_to_be_csved.xml')
+
+xml = ElementTree.parse(path_to_xml) # File's loading
 def find_max_number_categories(): # This function finds the max number of categories of the news
 
     max_categories = 0
@@ -40,8 +42,8 @@ def write_categories(doc): # This function writes all the categories of a specif
     
          
 
-
-csvfile = open(".csv","w", encoding='utf-8') # CSV Creation
+output_csv = os.path.join('Files_to_process', 'news_dataset.csv')
+csvfile = open(output_csv,"w", encoding='utf-8') # CSV Creation
 csvfile_writer = csv.writer(csvfile)
 
 csvfile.write('\ufeff') # Metadata for the right "utf-8" encoding
