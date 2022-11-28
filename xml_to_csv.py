@@ -1,4 +1,4 @@
-# This file trasform the xml file in the csv one for the generation of the dataset.
+# This file trasform the xml customized file in the csv one for the generation of the dataset.
 #
 # Author: Paolo Ciasco
 
@@ -6,8 +6,8 @@ import os
 from xml.etree import ElementTree
 import csv
 
-path_to_xml = os.path.join('Files_to_process', 'news_to_be_csved.xml')
 
+path_to_xml = os.path.join('Files_to_process', 'news_to_be_csved.xml') # Generate the path where the file has to be
 xml = ElementTree.parse(path_to_xml) # File's loading
 def find_max_number_categories(): # This function finds the max number of categories of the news
 
@@ -42,7 +42,7 @@ def write_categories(doc): # This function writes all the categories of a specif
     
          
 
-output_csv = os.path.join('Files_to_process', 'news_dataset.csv')
+output_csv = os.path.join('Files_to_process', 'news_dataset.csv') # Generate the output path
 csvfile = open(output_csv,"w", encoding='utf-8') # CSV Creation
 csvfile_writer = csv.writer(csvfile)
 
@@ -55,25 +55,30 @@ csvfile.write(header)
 
 for doc in xml.findall("doc"):
     if(doc):
-            name = doc.find("title").text
-            if(doc.find("source") != None): 
-                source = doc.find("source").text
+            if(doc.find("title") != None):
+                if(doc.find("title").text != None):
+                    name = doc.find("title").text
+            else:
+                name = None
+            if(doc.find("source") != None):
+                if(doc.find("source").text != None):
+                    source = doc.find("source").text
             else:
                 source = None
             if(doc.find("news") != None):
-                news = doc.find("news").text
+                if(doc.find("news").text != None):
+                    news = doc.find("news").text
             else:
                 news = None
+
             categories = write_categories(doc)
             
             if(name == None or source == None or news == None or categories == None):
                 csv_line = ''
             else:
-                csv_line =  name + '___'  + source   + '___' + str(news) + '___' + categories  + '\n'
+                csv_line =  str(name) + '___'  + str(source)   + '___' + str(news) + '___' + str(categories)  + '\n'
             
             csvfile.write(csv_line)
-    
-
 
 csvfile.close()
         

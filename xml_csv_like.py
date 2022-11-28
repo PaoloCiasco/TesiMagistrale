@@ -14,7 +14,7 @@ et.register_namespace('georss', "http://www.georss.org/georss")
 
 #####
 
-path_to_xml = os.path.join('Files_to_process', 'news_to_process.xml')
+path_to_xml = os.path.join('Files_to_process', 'news_to_process.xml') # Generate the path where the file has to be
 oldtree = et.parse(path_to_xml) # File's loading (beautified version)
 myroot = oldtree.getroot() # Root selection
 
@@ -89,12 +89,10 @@ for child in myroot:
 
 ######                           
 
-
-
 tree = et.ElementTree(newroot) # New tree generation for the output file
 
 et.indent(tree, space="\t", level=0) # Correct indentation (needs Python >= 3.9)
-output_filename = os.path.join('Files_to_process', 'news_to_be_csved.xml')
+output_filename = os.path.join('Files_to_process', 'news_to_be_csved.xml') # Generate the output path
 tree.write(output_filename, encoding='utf-8') # Writing of the new xml file to be ready for the trasformation to the csv one
 
 
