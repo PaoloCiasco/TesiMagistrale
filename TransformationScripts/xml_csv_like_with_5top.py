@@ -19,7 +19,7 @@ et.register_namespace('georss', "http://www.georss.org/georss")
 
 #####
 
-path_to_xml = os.path.join('Files_to_process', 'news_to_process.xml')
+path_to_xml = os.path.join('Files_to_process', 'news_to_process_top5.xml') # Generate the path where the file has to be
 oldtree = et.parse(path_to_xml) # File's loading (beautified version)
 myroot = oldtree.getroot() # Root selection
 
@@ -35,7 +35,7 @@ dict_cate = {}
 
 ## Every item in the original file is a doc to be indexed
 ## These loops search for a national news (not in a specified region) and append a new "doc" subelement in the xml output file
-## This is a solution for the issue written on the thesis at the end of the 2.0.1 subchapter
+## This is a solution for the issue written on the thesis at the end of the 3.3 section.
 
 for child in myroot:
     if (child.tag == 'section'):
@@ -135,6 +135,7 @@ for element in array_dict:
 tree = et.ElementTree(newroot) # New tree generation for the output file
 
 et.indent(tree, space="\t", level=0) # Correct indentation (needs Python >= 3.9)
-tree.write(".xml", encoding='utf-8') # Writing of the new xml file to be indexed
+output_filename = os.path.join('Files_to_process', 'news_to_be_csved_top5.xml') # Generate the output path
+tree.write(output_filename, encoding='utf-8') # Writing of the new xml file to be indexed
 
 

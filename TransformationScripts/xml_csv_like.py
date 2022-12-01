@@ -25,7 +25,7 @@ i = 0 # Counter to scan the "doc" elements
 
 ## Every item in the original file is a doc to be indexed
 ## These loops search for a national news (not in a specified region) and append a new "doc" subelement in the xml output file
-## This is a solution for the issue written on the thesis at the end of the 2.0.1 subchapter
+## This is a solution for the issue written on the thesis at the end of the 3.3 section
 
 for child in myroot:
     if (child.tag == 'section'):
