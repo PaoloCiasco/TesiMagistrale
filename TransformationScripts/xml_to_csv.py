@@ -55,14 +55,9 @@ csvfile.write(header)
 
 for doc in xml.findall("doc"):
     if(doc):
-            if(doc.find("title") != None):
-                if(doc.find("title").text != None):
-                    name = doc.find("title").text
-            else:
-                name = None
+            name = doc.find("title").text
             if(doc.find("source") != None):
-                if(doc.find("source").text != None):
-                    source = doc.find("source").text
+                source = doc.find("source").text
             else:
                 source = None
             if(doc.find("news") != None):
